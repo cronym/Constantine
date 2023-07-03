@@ -9,6 +9,7 @@ on:
 env:
   BLUESKY_HANDLE: ${{ vars.BLUESKY_HANDLE }}
   BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+  MAX_DELETE_POSTS: ${{ vars.MAX_DELETE_POSTS || '100' }}
 
 jobs:
   check_bluesky_handle:
@@ -54,5 +55,5 @@ jobs:
           BLUESKY_USER: ${{ vars.BLUESKY_HANDLE }}
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
         run:
-            python delete_hellthreads.py ${BLUESKY_USER} --max-posts 10 --before-date $(date --date="yesterday" +"%Y-%m-%d")
+            python delete_hellthreads.py ${BLUESKY_USER} --max-posts ${MAX_DELETE_POSTS} --before-date $(date --date="yesterday" +"%Y-%m-%d")
 
